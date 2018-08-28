@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+<title>{% block title %} Buydata {% endblock %}</title>
+
+
+   {% block extra_head %} {%endblock %}
+</head>
+<body>
+Body<br/>
+
+<hr/>
+
+영상 업로드 :
+
+ <input type="file" id="files3" name="files_mask_in" accept = "*" />
+  <label for="files3" style="margin:0;">
+
+
+<hr/>
+{% block content %}
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+</body>
+<footer class="footer">
+
+
+       <p>© 2018 Copyright by NALBI Inc. </p>
+
+</footer>
+</html>
