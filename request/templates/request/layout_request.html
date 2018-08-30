@@ -14,13 +14,21 @@ Body<br/>
 
 <hr/>
 
-영상 업로드 :
+
 <form id="once" action="" method="post" enctype="multipart/form-data">
     {%csrf_token %}
+    영상 업로드 :
     <input type="file" id="files3" name="files_video" accept = "*" />
-    <label for="files3" style="margin:0;"/>
 
-    <input type="submit" id="submit"  onClick="OneClick(0)" value="등록!" />
+    사진 업로드 :
+    <input type="file" id="files2" name="files_face" accept = "image/*" multiple/>
+
+
+
+    <input type="submit" id="file"  name="file"   value="등록!" />
+
+    <input type="submit" id="download"  name="download"   value="다운로드" />
+
 </form>
 <hr/>
 {% block content %}
