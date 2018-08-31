@@ -43,7 +43,10 @@ def index(request):
                 known_faces_name = []
                 for face_img in f_img_list:
                     image = face_recognition.load_image_file(BASE_DIR + face_img.img.url)
-                    face_encoding = face_recognition.face_encodings(image)[0]
+                    if (len(face_recognition.face_encodings(image))>0):
+                        face_encoding = face_recognition.face_encodings(image)[0]
+                    else:
+                        return render(request, 'request/message.html', {'msg': "잘못된 얼굴사진!"})
                     known_faces.append(face_encoding)
                     known_faces_name.append(face_img.fname)
 
@@ -104,10 +107,12 @@ def index(request):
                     # Write the resulting image to the output video file
                     print("Writing frame {} / {}".format(frame_number, length))
                     output_movie.write(frame)
-                    return render(request, 'request/layout_request.html', )
+                high.status = 1
+                high.save()
+            return render(request, 'request/layout_request.html',{'msg': "작업 완료"} )
         elif ('download' in request.POST):
             print("download")
-            high_list = Highlight.objects.all().order_by('pk')
+            high_list = Highlight.objects.filter(status=1)
             print("len = ", len(high_list))
             in_memory = BytesIO()
             now = time.localtime()
@@ -117,7 +122,8 @@ def index(request):
             for high in high_list:
                 print("high.file_out.name = ", high.file_out.name)
                 print("high.fname = ", high.fname)
-                zfile.write(file_path_base + high.file_out.name, high.fname )
+                zfile.write(file_path_base + high.file_out.name, str(high.pk)+"_out_"+high.fname )
+                high.delete()
             zfile.close()
             response = HttpResponse()
             response['content_type'] = 'application/zip'

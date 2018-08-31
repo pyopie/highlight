@@ -4,4 +4,4 @@ from django.shortcuts import render
 def index(request):
 	print("Hi AWS!!!!!!!!!!!!!!!!")
 	#return HttpResponse("Hello, World Local Test")
-	return render(request, 'layout.html', )
+	return HttpResponseRedirect("request/index")

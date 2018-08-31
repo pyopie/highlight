@@ -6,7 +6,7 @@ def upload_to_input(instance, filename):
     return 'file/input/%s' % (filename)
 
 def upload_to_output(instance, filename):
-    return 'file/output/%s' % (filename)
+    return 'file/output/%s' % ("out_"+filename)
 
 def upload_to_img(instance, filename):
     return 'file/img/%s' % (filename)
@@ -20,3 +20,4 @@ class Highlight(models.Model):
     file_in = models.FileField(blank=True, null=True, upload_to=upload_to_input)
     fname = models.CharField(max_length=30, null=True)
     file_out = models.FileField(blank=True, null=True, upload_to=upload_to_output)
+    status = models.IntegerField(default=0)
