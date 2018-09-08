@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 def upload_to_input(instance, filename):
-    return 'file/input/%s' % (filename)
+    return 'file/input/%s' % (str(instance.pk)+"_"+filename)
 
 def upload_to_output(instance, filename):
-    return 'file/output/%s' % ("out_"+filename)
+    return 'file/output/%s' % ("out_"+str(instance.pk)+"_"+filename)
 
 def upload_to_img(instance, filename):
-    return 'file/img/%s' % (filename)
+    return 'file/img/%s' % (str(instance.pk)+"_"+filename)
 
 class Face_img(models.Model):
     img = models.FileField(blank=True, null=True, upload_to=upload_to_img)
